@@ -13,6 +13,8 @@ Blogverse is a modern blog management website built with Django that allows user
 - Search functionality
 - Category-based post organization
 
+## Live Link
+- https://blogverse-k8ji.onrender.com/
 ## Tech Stack
 
 - **Backend**: Django 4.2.5
