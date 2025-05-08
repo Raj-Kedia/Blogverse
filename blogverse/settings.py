@@ -21,7 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', "l=rlgjubv9^b)1*zwxb@hwsdu&k_r=(xaz$g!d1vd#+@md+mn^")
 
 DEBUG = False
-CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app/"]CSRF_COOKIE_SECURE = True 
+CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app"]
+CSRF_COOKIE_SECURE = True 
 ALLOWED_HOSTS = ["*"] 
 
 # Application definition
