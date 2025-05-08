@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Create blog {% endblock title %}
+
+{% block body %}
+<h1>Create Your Blog</h1>
+{% if user.is_authenticated %}
+<form action="{% url 'createblog' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="image" class="form-label">Media</label>
+        <input type="file" name="file">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label" required>Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Place your title here " required>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label" required>Content</label>
+        <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label" required>Author</label>
+        <input type="text" class="form-control" id="author" name="author" placeholder="Author" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+{% else %}
+        Please login to post a blog.
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends '../base.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+<div class="container text-center" style="background-color: #f8f9fa; padding: 50px;">
+    <h1 class="display-4">Welcome to the Blogverse!</h1>
+    <p class="lead">Explore a universe of captivating blogs and insightful articles.</p>
+    <a class="btn btn-primary btn-lg" href="/blog" role="button">Go to Blog</a>
+</div>
+
+<div class="container text-center" style="background-color: #343a40; color: #ffffff; padding: 50px;">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Featured Content</h2>
+            <p>Discover a wide range of topics from experts in the field.</p>
+        </div>
+        <div class="col-md-6">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest insights.</p>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2023 Blogverse. All rights reserved.</p>
+</footer>
+{% endblock %}

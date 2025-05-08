@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} Viewblog {% endblock title %}
+
+{% block blogactive %} active {% endblock blogactive %}
+
+{% block body %}
+<div class="container my-3">
+    {% if messages %}
+    <div class="alert alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <strong> {{ message }}</strong>
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    <h2>Articles on Blogverse</h2>
+
+    {% for post in allPosts %}
+    <div class="card">
+        {% if post.file %}
+        {% if ".mp4" in post.file.url|lower %}
+        <video width="320" height="240" class="text-center" controls>
+            <source src="{{ post.file.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        {% elif ".jpg" in post.file.url|lower or ".png" in post.file.url|lower %}
+        <div class="text-center">
+            <img src="{{ post.file.url }}" alt="{{ post.title }}" style="width: 200px; height: 200px;">
+        </div>
+        {% endif %}
+        {% endif %}
+        <div class="card-body">
+            <div class="head">
+                <h5 class="card-title">{{ post.title }}</h5>
+            </div>
+            <p class="card-text mb-auto">{{ post.content | safe | truncatechars:200}}</p>
+            <div class="my-2">
+                <a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}
