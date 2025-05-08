@@ -20,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 SECRET_KEY = os.environ.get('SECRET_KEY', "l=rlgjubv9^b)1*zwxb@hwsdu&k_r=(xaz$g!d1vd#+@md+mn^")
 
-DEBUG = os.environ.get('DEBUG', False) == True
-if DEBUG:
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+if DEBUG=='True':
     CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app/"]
 ALLOWED_HOSTS = ["https://blogverse-production-822b.up.railway.app/", "https://blogverse-k8ji.onrender.com/", "127.0.0.1"] 
 
