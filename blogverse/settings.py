@@ -22,7 +22,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', "l=rlgjubv9^b)1*zwxb@hwsdu&k_r=(xaz$g!
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app/"]
-ALLOWED_HOSTS = ["https://blogverse-production-822b.up.railway.app/", "https://blogverse-k8ji.onrender.com/", "127.0.0.1"] 
+ALLOWED_HOSTS = ["*"] 
 
 # Application definition
 
