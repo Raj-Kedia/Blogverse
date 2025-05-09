@@ -51,8 +51,8 @@ def handleSignUp(request):
         pass2 = request.POST["pass2"]
 
         # check for errorneous input
-        if len(username) >= 10:
-            messages.error(request, " Your user name must be under 10 characters")
+        if len(username) >= 50:
+            messages.error(request, " Your user name must be under 50 characters")
             return redirect("home")
 
         if not username.isalnum():
