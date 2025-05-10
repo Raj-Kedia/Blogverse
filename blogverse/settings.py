@@ -13,18 +13,20 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from django.contrib.messages import constants as messages
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-SECRET_KEY = os.environ.get('SECRET_KEY', "l=rlgjubv9^b)1*zwxb@hwsdu&k_r=(xaz$g!d1vd#+@md+mn^")
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', "l=rlgjubv9^b)1*zwxb@hwsdu&k_r=(xaz$g!d1vd#+@md+mn^")
 
 DEBUG = os.environ.get("DEBUG", True)
 print(DEBUG)
 CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app"]
-CSRF_COOKIE_SECURE = True 
-ALLOWED_HOSTS = ["*"] 
+CSRF_COOKIE_SECURE = True
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,7 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -73,6 +75,9 @@ WSGI_APPLICATION = "blogverse.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+if DEBUG:
+    load_dotenv()
+
 
 DATABASES = {
     'default': {
