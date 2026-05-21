@@ -1,0 +1,235 @@
+/* Custom Stylesheet for Blogverse */
+
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary-color: #06b6d4;
+    --background-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --nav-bg: #0f172a;
+    --footer-bg: #0f172a;
+    --accent-glow: rgba(79, 70, 229, 0.15);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* Navbar Custom Styling */
+.navbar {
+    background-color: var(--nav-bg) !important;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-brand img {
+    filter: drop-shadow(0 2px 8px rgba(79, 70, 229, 0.4));
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: var(--secondary-color) !important;
+}
+
+/* Custom Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+
+.btn-outline-success {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+}
+
+/* Modals */
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+}
+
+.modal-header {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1.5rem;
+}
+
+.modal-title {
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #f1f5f9;
+}
+
+/* Custom Cards */
+.card {
+    background: var(--card-bg);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e1;
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* Forms Input Customization */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    padding: 0.625rem 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Comments area styling */
+.rounded.mx-auto.d-block.w-100 {
+    border-radius: 50% !important;
+    max-width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+
+.badge-secondary {
+    background-color: #e2e8f0;
+    color: #475569;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.collapse .card-body {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+/* Jumbotron / Hero Headers */
+.hero-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-header h1 {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.hero-header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: var(--primary-color);
+    filter: blur(120px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Profile Picture styling */
+.profile-card img {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 4px solid #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.profile-card img:hover {
+    transform: scale(1.05);
+}
+
+/* General Layouts */
+.container {
+    max-width: 1100px;
+}
+
+/* Edit pencil icon styling */
+.edit-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    margin-left: 0.75rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.edit-icon:hover {
+    color: var(--primary-hover);
+    transform: scale(1.1);
+    text-decoration: none;
+}
+
+/* Static logo sizes */
+.logo {
+    display: inline-block;
+    vertical-align: middle;
+}

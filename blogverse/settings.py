@@ -17,13 +17,18 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file early
+load_dotenv(BASE_DIR / '.env')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 SECRET_KEY = os.environ.get(
     'SECRET_KEY', "l=rlgjubv9^b)1*zwxb@hwsdu&k_r=(xaz$g!d1vd#+@md+mn^")
 
-DEBUG = os.environ.get("DEBUG", True)
-print(DEBUG)
+# Safely parse DEBUG as boolean
+DEBUG = str(os.environ.get("DEBUG", "True")).lower() in ("true", "1", "t", "y", "yes")
+print(f"DEBUG status: {DEBUG}")
+
 CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app"]
 CSRF_COOKIE_SECURE = True
 ALLOWED_HOSTS = ["*"]
@@ -75,27 +80,24 @@ WSGI_APPLICATION = "blogverse.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-if DEBUG:
-    load_dotenv()
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('PGDATABASE'),
-        'USER': os.getenv('PG_USER'),
-        'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT'),
+if not os.getenv('PGDATABASE'):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('PGDATABASE'),
+            'USER': os.getenv('PG_USER'),
+            'PASSWORD': os.getenv('PGPASSWORD'),
+            'HOST': os.getenv('PGHOST'),
+            'PORT': os.getenv('PGPORT'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -138,7 +140,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-# Enable WhiteNoise compression and caching
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Enable WhiteNoise compression and caching in production
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MESSAGE_TAGS = {messages.ERROR: "danger"}
+
+LOGIN_URL = 'handleLogin'

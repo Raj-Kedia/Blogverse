@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from blog.templatetags import extras
 import markdown2
 from blog.models import *
+from django.contrib.auth.decorators import login_required
 
 
 def blogHome(request):
@@ -55,7 +56,7 @@ def postComment(request):
             messages.success(
                 request, "Your reply has been posted successfully")
 
-    return redirect(f"/blog/{post.slug}")
+    return redirect("blogPost", slug=post.slug)
 
 
 def generate_slug(title):
@@ -63,31 +64,45 @@ def generate_slug(title):
     return slug
 
 
+@login_required
 def create_blog(request):
-    # return render(request, 'blog/createblog.html')
-    print('in the create blog')
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        # Assuming you're getting the username from the form
-        author_username = request.POST.get('author')
-        # Get the user object based on the username
-        author = User.objects.filter(username=author_username).first()
-        # file = request.FILES.get('file')
-        image = request.FILES.get('image')
-        html_content = markdown2.markdown(content)
-        # created_at = models.DateTimeField(auto_now_add=True)
-        if not title:
-            messages.error(request, "Please enter the title")
-        if not content:
-            messages.error(request, "Please give more content about your blog")
+        author_username = request.user.username
+        image = request.FILES.get('file')
+        
+        if not title or not content:
+            if not title:
+                messages.error(request, "Please enter the title")
+            if not content:
+                messages.error(request, "Please give more content about your blog")
         else:
-            # Generate the slug
             slug = generate_slug(title)
-
+            html_content = markdown2.markdown(content)
             post = Post(title=title, content=html_content, author=author_username,
                         file=image, slug=slug)
             post.save()
             messages.success(request, "Blog has been successfully created")
+            return redirect("blogPost", slug=post.slug)
 
     return render(request, 'blog/createblog.html')
+
+
+def viewprofile(request):
+    username = request.GET.get('username')
+    if username:
+        profile_user = User.objects.filter(username=username).first()
+    else:
+        profile_user = request.user if request.user.is_authenticated else None
+
+    if not profile_user:
+        messages.error(request, "User not found.")
+        return redirect('home')
+
+    user_posts = Post.objects.filter(author=profile_user.username)
+    context = {
+        'profile_user': profile_user,
+        'user_posts': user_posts
+    }
+    return render(request, "blog/viewprofile.html", context)

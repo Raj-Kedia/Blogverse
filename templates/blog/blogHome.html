@@ -18,18 +18,18 @@
     <h2>Articles on Blogverse</h2>
 
     {% for post in allPosts %}
-    <div class="card">
+    <div class="card shadow-sm mb-4">
         {% if post.file %}
-        {% if ".mp4" in post.file.url|lower %}
-        <video width="320" height="240" class="text-center" controls>
-            <source src="{{ post.file.url }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        {% elif ".jpg" in post.file.url|lower or ".png" in post.file.url|lower %}
-        <div class="text-center">
-            <img src="{{ post.file.url }}" alt="{{ post.title }}" style="width: 200px; height: 200px;">
+        <div class="text-center bg-light p-3 border-bottom">
+            {% if ".mp4" in post.file.url|lower or ".mov" in post.file.url|lower %}
+            <video width="100%" style="max-height: 250px; max-width: 400px; border-radius: 8px;" controls>
+                <source src="{{ post.file.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            {% else %}
+            <img src="{{ post.file.url }}" alt="{{ post.title }}" class="rounded shadow-sm" style="max-height: 200px; max-width: 100%; object-fit: cover;">
+            {% endif %}
         </div>
-        {% endif %}
         {% endif %}
         <div class="card-body">
             <div class="head">
@@ -37,7 +37,7 @@
             </div>
             <p class="card-text mb-auto">{{ post.content | safe | truncatechars:200}}</p>
             <div class="my-2">
-                <a href="/blog/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+                <a href="{% url 'blogPost' slug=post.slug %}" role="button" class="btn btn-primary">Continue reading</a>
             </div>
         </div>
     </div>
