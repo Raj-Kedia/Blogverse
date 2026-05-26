@@ -29,9 +29,9 @@ SECRET_KEY = os.environ.get(
 DEBUG = str(os.environ.get("DEBUG", "True")).lower() in ("true", "1", "t", "y", "yes")
 print(f"DEBUG status: {DEBUG}")
 
-CSRF_TRUSTED_ORIGINS = ["https://blogverse-production-822b.up.railway.app"]
-CSRF_COOKIE_SECURE = True
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost').split(',')
+CSRF_COOKIE_SECURE = not DEBUG
 
 # Application definition
 
