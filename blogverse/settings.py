@@ -29,9 +29,12 @@ SECRET_KEY = os.environ.get(
 DEBUG = str(os.environ.get("DEBUG", "True")).lower() in ("true", "1", "t", "y", "yes")
 print(f"DEBUG status: {DEBUG}")
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost').split(',')
+CSRF_TRUSTED_ORIGINS = [
+    "https://blogverse-production-822b.up.railway.app",
+    "https://blogverse.duckdns.org",
+]
 CSRF_COOKIE_SECURE = not DEBUG
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
